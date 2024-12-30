@@ -1,8 +1,6 @@
 import math
 import string
 
-calc_on = True
-
 have_params = {
     "p1": False,
     "p2": False,
@@ -25,6 +23,12 @@ params = {
     "l1": "",
     "l2": "",
     "l3": ""
+}
+
+opposite = {
+    "a1": "l2",
+    "a2": "l3",
+    "a3": "l1"
 }
 
 twitch = [params["l1"], params["l2"], params["l3"]]
@@ -112,7 +116,6 @@ def check_pars():
             print("Invalid input in length 4.3")
             exit(4)
 
-
     twitch = [params["l1"], params["l2"], params["l3"]]
 
     # sorting the lengths
@@ -144,9 +147,9 @@ class Triangle:
         self.param = params
 
     def abt(self):
-        print("p1: " + self.param["p1"] + " " + str(have_params["p1"]))
-        print("p2: " + self.param["p2"] + " " + str(have_params["p2"]))
-        print("p3: " + self.param["p3"] + " " + str(have_params["p3"]))
+        print("p1: " + str(self.param["p1"]) + " " + str(have_params["p1"]))
+        print("p2: " + str(self.param["p2"]) + " " + str(have_params["p2"]))
+        print("p3: " + str(self.param["p3"]) + " " + str(have_params["p3"]))
         print("a1: " + str(self.param["a1"]) + " " + str(have_params["a1"]))
         print("a2: " + str(self.param["a2"]) + " " + str(have_params["a2"]))
         print("a3: " + str(self.param["a3"]) + " " + str(have_params["a3"]))
@@ -158,16 +161,51 @@ class Triangle:
     def is_triangle(self):
         pass
 
+    def calc_angles(self):
+        if not have_params["a1"] or have_params["a2"] or have_params["a3"]:
+            if have_params["a2"] and have_params["a3"]:
+                self.param["a1"] = str(180 - (int(self.param["a2"]) + int(self.param["a3"])))
+                int(self.param["a1"])
+
+        if not have_params["a2"] or have_params["a1"] or have_params["a3"]:
+            if have_params["a1"] and have_params["a3"]:
+                self.param["a2"] = str(180 - (int(self.param["a1"]) + int(self.param["a3"])))
+                int(self.param["a2"])
+
+        if not have_params["a3"] or have_params["a1"] or have_params["a2"]:
+            if have_params["a1"] and have_params["a2"]:
+                self.param["a3"] = str(180 - (int(self.param["a1"]) + int(self.param["a2"])))
+                int(self.param["a3"])
+
+
+    def calc_lengths(self):
+        pass
+
     def is_rectangle(self):
-        if have_params["a1"] == 90 or have_params["a2"] == 90 or have_params["a3"] == 90:
+        if self.param["a1"] == 90 or self.param["a2"] == 90 or self.param["a3"] == 90:
             return True
         else:
             return False
+
+    def is_square(self):
+        if self.param["a1"] == 90 or self.param["a2"] == 90 or self.param["a3"] == 90:
+            return True
+        else:
+            return False
+
+    def cosine(self, ang, len, search):
+        pass
+
+    def sine(self):
+        pass
+
+    def tangent(self):
+        pass
 
 
 get_pars()
 check_pars()
 figure = Triangle()
 figure.abt()
-reset()
+figure.calc_angles()
 figure.abt()
